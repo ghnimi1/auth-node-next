@@ -3,14 +3,19 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/authRoutes');
 
 // Configuration des variables d'environnement
 dotenv.config();
 
 const app = express();
 
-// Middleware
+// Middleware pour afficher les logs des requêtes
+app.use((req, res, next) => {
+    console.log(`${req.method} request to ${req.url}`);
+    next();
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 
